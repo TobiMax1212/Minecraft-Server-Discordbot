@@ -7,6 +7,9 @@ import random
 from mcstatus import JavaServer
 import os
 
+#THIS IS TEST
+print("Bot wird gestartet...")
+
 # Pfad zu 'app.json' anpassen
 script_dir = os.path.dirname(os.path.abspath(__file__))
 json_path = os.path.join(script_dir, 'app.json')
