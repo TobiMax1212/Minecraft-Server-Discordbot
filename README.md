@@ -1,144 +1,67 @@
-# 🤖 Discord Minecraft Status Bot
+# ⛏️ Minecraft Server Discord Bot
 
-Ein einfacher Discord-Bot, der den Status eines Minecraft-Servers überprüft und zusätzlich ein kleines Minigame (Schere, Stein, Papier) bietet.
+Ein einfacher Discord-Bot, der den Status eines Minecraft-Servers (Java Edition) abfragt und ein kleines Minispiel beinhaltet. Vollständig dockerisiert für schnelles Deployment und maximale Sicherheit.
 
----
-
-## ✨ Features
-
-- 🟢 Minecraft-Server Status anzeigen (inkl. Spieleranzahl)
-- 🔴 Offline-Erkennung
-- 🎮 Minigame: Schere, Stein, Papier
-- ⚙️ Konfiguration über `app.json`
+## 🚀 Features
+- **`!status`**: Zeigt Server-IP, Port und die aktuelle Spieleranzahl live an.
+- **`!spiel [Schere/Stein/Papier]`**: Spielt eine Runde Schere-Stein-Papier gegen den Bot.
+- **Docker-Support**: Kein lokales Python-Setup nötig – alles läuft isoliert im Container.
+- **Sicher**: Sensible Daten wie der Bot-Token werden über Umgebungsvariablen geladen.
 
 ---
 
-## 📦 Voraussetzungen
+## 🛠️ Setup & Installation
 
-- Python 3.10 oder höher
-- Discord Bot Token
+### 1. Dateien vorbereiten
+Stelle sicher, dass du folgende Dateien in deinem Projektordner angelegt hast:
 
-### Installation der Abhängigkeiten
+**A) .env (für den Discord-Token)**
+Erstelle eine Datei namens `.env` im Hauptverzeichnis und füge deinen Bot-Token ein:
+```text
+DISCORD_TOKEN=DEIN_BOT_TOKEN_HIER
 
-```bash
-pip install discord.py mcstatus
-```
+B) app.json (für die Server-Konfiguration)
+Erstelle eine Datei namens app.json für die Minecraft-Server-Daten:
+JSON
 
----
-
-## ⚙️ Einrichtung
-
-### 1. Repository klonen
-
-```bash
-git clone https://github.com/dein-username/dein-repo.git
-cd dein-repo
-```
-
----
-
-### 2. `app.json` erstellen
-
-Erstelle im Projektverzeichnis eine Datei namens `app.json`:
-
-```json
 {
-  "ms_url": "example.minecraftserver.com",
-  "ms_port": 25565,
-  "token": "DEIN_DISCORD_BOT_TOKEN"
+    "ms_url": "deine-server-ip.de",
+    "ms_port": 25565
 }
-```
 
----
+2. Mit Docker starten (Empfohlen)
 
-### 3. Discord Bot erstellen
+Du musst keine Abhängigkeiten auf deinem PC installieren. Baue einfach das Image und starte den Container:
 
-1. Öffne das Discord Developer Portal  
-2. Neue Application erstellen  
-3. Unter **Bot → Add Bot** klicken  
-4. Token kopieren und in `app.json` einfügen  
-5. Unter **Privileged Gateway Intents**:
-   - ✅ Message Content Intent aktivieren  
+Image bauen:
+Bash
 
----
+docker build -t minecraft-bot .
 
-### 4. Bot einladen
+Container starten:
+Bash
 
-Gehe zu **OAuth2 → URL Generator**:
+docker run -d \
+  --name minecraft-discord-bot \
+  --env-file .env \
+  -v $(pwd)/app.json:/app/app.json \
+  minecraft-bot
 
-- Scopes:
-  - `bot`
-- Bot Permissions:
-  - Send Messages
-  - Embed Links
+(Hinweis für Windows PowerShell Nutzer: Verwende ${PWD} anstelle von $(pwd) für das Volume-Mounting.)
+🏗️ Projektstruktur
+Plaintext
 
-Dann generierte URL im Browser öffnen und Bot hinzufügen.
-
----
-
-### 5. Bot starten
-
-```bash
-python bot.py
-```
-
----
-
-## 💬 Befehle
-
-### `!status`
-
-Zeigt den aktuellen Status des Minecraft-Servers an:
-
-- 🟢 Online → Spieleranzahl wird angezeigt  
-- 🔴 Offline → Hinweis wird ausgegeben  
-
----
-
-### `!spiel <wahl>`
-
-Spiele Schere, Stein, Papier gegen den Bot.
-
-**Beispiel:**
-
-```bash
-!spiel schere
-```
-
-**Optionen:**
-- schere
-- stein
-- papier
-
----
-
-## 📁 Projektstruktur
-
-```
 .
-├── bot.py
-└── app.json
-```
+├── bot.py             # Die Bot-Logik (Python)
+├── Dockerfile         # Bauanleitung für das Docker-Image
+├── requirements.txt   # Benötigte Python-Bibliotheken
+├── .env               # Private Geheimnisse (wird durch .gitignore geschützt)
+├── app.json           # Server-Konfiguration (wird durch .gitignore geschützt)
+├── .gitignore         # Verhindert den Upload privater Dateien auf GitHub
+└── .dockerignore      # Verhindert, dass unnötige Dateien im Image landen
 
----
+🔒 Sicherheit
 
-## ⚠️ Hinweise
+Die Dateien .env und app.json enthalten sensible Informationen. Sie sind in der .gitignore eingetragen, damit sie niemals öffentlich auf GitHub landen. Nutze die bereitgestellten .example-Dateien im Repository als Vorlage für dein eigenes Setup.
 
-- Stelle sicher, dass dein Minecraft-Server öffentlich erreichbar ist
-- Der Bot benötigt Internetzugriff
-- Fehler beim Status kommen meist von falscher IP/Port
-
----
-
-## 🛠️ To-Do / Ideen
-
-- [ ] Slash Commands hinzufügen
-- [ ] Server Ping anzeigen
-- [ ] Mehr Spiele integrieren
-- [ ] Logging erweitern
-
----
-
-## 📄 Lizenz
-
-Dieses Projekt ist frei nutzbar. Du kannst es anpassen und erweitern.
+Entwickelt mit ❤️, Docker und der Hilfe von KI wie ChatGPT und Gemini.
