@@ -26,6 +26,7 @@ DISCORD_TOKEN=DEIN_BOT_TOKEN_HIER
 #### B) `app.json` (für die Server-Konfiguration)
 Erstelle eine Datei namens `app.json` für die Minecraft-Server-Daten:
 
+**`Beachte! Die Port Nummer wie unten zu sehen ist die Standard Port Nummer. Diese kann je nach Konfiguration anders sein!`**
 ```json
 {
     "ms_url": "deine-server-ip.de",
@@ -35,25 +36,27 @@ Erstelle eine Datei namens `app.json` für die Minecraft-Server-Daten:
 
 ---
 
-## 2. Mit Docker starten (Empfohlen)
+## 2. Docker installieren (WICHTIG)
 
-Du musst keine Abhängigkeiten auf deinem PC installieren. Baue einfach das Image und starte den Container:
+Es ist sehr wichtig, dass du Docker installiert hast.
+Ansonsten werden die folgenden Schritte **`NICHT`** funktionieren!
 
-### Image bauen:
-```bash
-docker build -t minecraft-bot .
-```
+---
+
+## 3. Mit Docker starten (Empfohlen)
+
+Du musst keine Abhängigkeiten auf deinem PC installieren. Führe einfach den untenstehenden Start-Befehl aus und die .yml macht den Rest.
 
 ### Container starten:
 ```bash
-docker run -d \
-  --name minecraft-discord-bot \
-  --env-file .env \
-  -v $(pwd)/app.json:/app/app.json \
-  minecraft-bot
+docker compose up -d
+```
+### Container stoppen:
+```bash
+docker compose down
 ```
 
-> 💡 Hinweis für Windows PowerShell Nutzer: Verwende `${PWD}` anstelle von `$(pwd)` für das Volume-Mounting.
+> 💡 Hinweis für die Docker unerfahrende -> Hier könnt ihr das offizielle Docker CLI Cheat Sheet nutzen https://docs.docker.com/get-started/docker_cheatsheet.pdf
 
 ---
 
