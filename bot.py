@@ -15,9 +15,11 @@ with open(json_path, 'r') as file:
     data = json.load(file)
 
 # Discord-Bot Variabeln
+
+token = os.getenv('DISCORD_TOKEN') # --> Get Discord Token from .env file --> DO NOT SAVE TOKEN IN CODE OR JSON FILE!
+
 ms_url = data['ms_url']
 ms_port = data['ms_port']
-token = data['token']
 ms_status_color_on = 0x00FF00
 ms_status_color_off = 0xFF0000
 IP = socket.gethostbyname(ms_url)

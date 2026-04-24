@@ -1,0 +1,8 @@
+services:
+  minecraft-discord-bot:
+    build: .
+    container_name: minecraft-discord-bot
+    env_file:
+      - .env
+    volumes:
+      - ./app.json:/app/app.json
