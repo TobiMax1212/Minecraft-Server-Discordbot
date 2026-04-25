@@ -55,6 +55,7 @@ Unter dem Reiter **'OAUTH2'** im URL-Generator **'Bot'** auswählen und dann die
 ### Schritt 5:
 URL nehmen und diese in die Websuche eingeben. Anschließend wird sich Discord öffnen und den User fragen, wohin der Bot installiert werden soll.
 An dieser Stelle muss der bestehende Server angegeben werden.
+
 ---
 
 ## 3. Docker installieren (WICHTIG)
