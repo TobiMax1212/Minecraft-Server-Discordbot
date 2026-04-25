@@ -6,6 +6,8 @@ import socket
 import random
 from mcstatus import JavaServer
 import os
+import sys
+import dotenv
 
 # Path to app.json
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +15,9 @@ json_path = os.path.join(script_dir, 'app.json')
 
 with open(json_path, 'r') as file:
     data = json.load(file)
+
+# Load environment variables from .env file
+dotenv.load_dotenv()
 
 # Discord-Bot variables
 
@@ -29,13 +34,14 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Check if the token is set in .env file
+
 def check_token(token):
     if token is None or token == "":
         print("Error: DISCORD_TOKEN is not set. Please set the token in the .env file.")
+        sys.exit(1)
     else:
         print("Token is set. Starting the bot...")
 check_token(token)
-
 
 # Function to check if the server port is open and get player count
 def check_port(ip, port):
@@ -80,9 +86,9 @@ async def serverinfo(ctx):
     answer = check_port(IP, ms_port)
     await ctx.send(embed=answer)
 
-@bot.command(name='help')
+@bot.command(name='h')
 async def help_command(ctx):
-    await ctx.send("Available commands:\n!game - Play Rock, Paper, Scissors\n!status - Check server status\n!help - Show this help message")
+    await ctx.send("Available commands:\n!game - Play Rock, Paper, Scissors\n!status - Check server status\n!h - Show this help message")
 
 @bot.command(name='ping')
 async def ping(ctx):
