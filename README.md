@@ -7,7 +7,6 @@ Ein einfacher Discord-Bot, der den Status eines Minecraft-Servers (Java Edition)
 - **`!spiel [Schere/Stein/Papier]`**: Spielt eine Runde Schere-Stein-Papier gegen den Bot.
 - **Docker-Support**: Kein lokales Python-Setup nötig – alles läuft isoliert im Container.
 - **Sicher**: Sensible Daten wie der Bot-Token werden über Umgebungsvariablen geladen.
-
 ---
 
 ## 🛠️ Setup & Installation
@@ -33,7 +32,28 @@ Erstelle eine Datei namens `app.json` für die Minecraft-Server-Daten:
     "ms_port": 25565
 }
 ```
+---
+## 2. Discord Bot erstellen
 
+Damit der Bot überhaupt genutzt werden kann. Muss dieser zunächst erstellt werden.
+Dies kann im Discord-Developer-Portal erledigt werden.
+
+### Schritt 1:
+Auf der Seite auf **'Erestellen'** gehen und einen Bot für die Community erstellen.
+
+### Schritt 2:
+Dem Bot alles nötigen **'Intents'**, unter dem Reiter **'Bot'** erteilen.
+
+### Schritt 3:
+Dem Bot unter dem Reiter **'Bot'** auf **'Token zurücksetzen'** gehen und den Token speichern
+**'WICHTIG! NIEMAND DARF DIESEN TOKEN SEHEN UND ODER BESITZEN AUßER DU. BEWARE DEN TOKEN SICHER AUF!'**
+
+### Schritt 4:
+Unter dem Reiter **'OAUTH2'** im URL-Generator **'Bot'** auswählen und dann die gewünschten berechtigungen zuweisen.
+
+### Schritt 5:
+URL nehmen und diese in die Websuche eingeben. Anschließend wird sich Discord öffnen und den User fragen, wohin der Bot installiert werden soll.
+An dieser Stelle muss der bestehende Server angegeben werden.
 ---
 
 ## 2. Docker installieren (WICHTIG)
