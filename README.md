@@ -33,6 +33,7 @@ Erstelle eine Datei namens `app.json` für die Minecraft-Server-Daten:
 }
 ```
 ---
+
 ## 2. Discord Bot erstellen
 
 Damit der Bot überhaupt genutzt werden kann. Muss dieser zunächst erstellt werden.
@@ -56,14 +57,14 @@ URL nehmen und diese in die Websuche eingeben. Anschließend wird sich Discord �
 An dieser Stelle muss der bestehende Server angegeben werden.
 ---
 
-## 2. Docker installieren (WICHTIG)
+## 3. Docker installieren (WICHTIG)
 
 Es ist sehr wichtig, dass du Docker installiert hast.
 Ansonsten werden die folgenden Schritte **`NICHT`** funktionieren!
 
 ---
 
-## 3. Mit Docker starten (Empfohlen)
+## 4. Mit Docker starten (Empfohlen)
 
 Du musst keine Abhängigkeiten auf deinem PC installieren. Führe einfach den untenstehenden Start-Befehl aus und die .yml macht den Rest.
 
