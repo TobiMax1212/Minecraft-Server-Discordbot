@@ -86,7 +86,7 @@ async def serverinfo(ctx):
     answer = check_port(IP, ms_port)
     await ctx.send(embed=answer)
 
-@bot.command(name='h')
+@bot.command(name='h'
 async def help_command(ctx):
     await ctx.send("Available commands:\n!game - Play Rock, Paper, Scissors\n!status - Check server status\n!h - Show this help message")
 
