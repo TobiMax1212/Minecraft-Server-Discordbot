@@ -31,7 +31,7 @@ IP = socket.gethostbyname(ms_url)
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix="!", intents=intents
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Check if the token is set in .env file
 
