@@ -1,106 +1,107 @@
 # ⛏️ Minecraft Server Discord Bot
 
-Ein einfacher Discord-Bot, der den Status eines Minecraft-Servers (Java Edition) abfragt und ein kleines Minispiel beinhaltet. Vollständig dockerisiert für schnelles Deployment und maximale Sicherheit.
+A simple Discord bot that queries the status of a Minecraft server (Java Edition) and includes a small minigame. Fully dockerized for fast deployment and maximum security.
 
 ## 🚀 Features
-- **`!status`**: Zeigt Server-IP, Port und die aktuelle Spieleranzahl live an.
-- **`!spiel [Schere/Stein/Papier]`**: Spielt eine Runde Schere-Stein-Papier gegen den Bot.
-- **Docker-Support**: Kein lokales Python-Setup nötig – alles läuft isoliert im Container.
-- **Sicher**: Sensible Daten wie der Bot-Token werden über Umgebungsvariablen geladen.
+- **`!status`**: Displays the server IP, port, and live player count.
+- **`!game [Rock/Paper/Scissors]`**: Plays a round of Rock, Paper, Scissors against the bot.
+- **`!h`**: Shows a help message listing all available commands.
+- **Docker Support**: No local Python setup required – everything runs isolated within a container.
+- **Secure**: Sensitive data, such as the bot token, is loaded via environment variables.
+
 ---
 
 ## 🛠️ Setup & Installation
 
-### 1. Dateien vorbereiten
+### 1. Prepare Files
 
-Stelle sicher, dass du folgende Dateien in deinem Projektordner angelegt hast:
+Make sure you have created the following files in your project directory:
 
-#### A) `.env` (für den Discord-Token)
-Erstelle eine Datei namens `.env` im Hauptverzeichnis und füge deinen Bot-Token ein:
+#### A) `.env` (for the Discord Token)
+Create a file named `.env` in the root directory and add your bot token:
 
 ```text
-DISCORD_TOKEN=DEIN_BOT_TOKEN_HIER
+DISCORD_TOKEN=YOUR_BOT_TOKEN_HERE
 ```
 
-#### B) `app.json` (für die Server-Konfiguration)
-Erstelle eine Datei namens `app.json` für die Minecraft-Server-Daten:
+#### B) `app.json` (for the Server Configuration)
+Create a file named `app.json` for the Minecraft server data:
 
-**`Beachte! Die Port Nummer wie unten zu sehen ist die Standard Port Nummer. Diese kann je nach Konfiguration anders sein!`**
+**`Note: The port number shown below is the default port. This might differ depending on your configuration!`**
 ```json
 {
-    "ms_url": "deine-server-ip.de",
+    "ms_url": "your-server-ip.com",
     "ms_port": 25565
 }
 ```
----
-
-## 2. Discord Bot erstellen
-
-Damit der Bot überhaupt genutzt werden kann. Muss dieser zunächst erstellt werden.
-Dies kann im Discord-Developer-Portal erledigt werden.
-
-### Schritt 1:
-Auf der Seite auf **'Erestellen'** gehen und einen Bot für die Community erstellen.
-
-### Schritt 2:
-Dem Bot alles nötigen **'Intents'**, unter dem Reiter **'Bot'** erteilen.
-
-### Schritt 3:
-Dem Bot unter dem Reiter **'Bot'** auf **'Token zurücksetzen'** gehen und den Token speichern
-**'WICHTIG! NIEMAND DARF DIESEN TOKEN SEHEN UND ODER BESITZEN AUßER DU. BEWARE DEN TOKEN SICHER AUF!'**
-
-### Schritt 4:
-Unter dem Reiter **'OAUTH2'** im URL-Generator **'Bot'** auswählen und dann die gewünschten berechtigungen zuweisen.
-
-### Schritt 5:
-URL nehmen und diese in die Websuche eingeben. Anschließend wird sich Discord öffnen und den User fragen, wohin der Bot installiert werden soll.
-An dieser Stelle muss der bestehende Server angegeben werden.
 
 ---
 
-## 3. Docker installieren (WICHTIG)
+## 2. Create the Discord Bot
 
-Es ist sehr wichtig, dass du Docker installiert hast.
-Ansonsten werden die folgenden Schritte **`NICHT`** funktionieren!
+Before the bot can be used, it must be created via the Discord Developer Portal.
+
+### Step 1:
+Go to the Developer Portal, click on **'New Application'**, and create a bot for your community.
+
+### Step 2:
+Navigate to the **'Bot'** tab and grant the bot all necessary **'Privileged Gateway Intents'**.
+
+### Step 3:
+Still in the **'Bot'** tab, click on **'Reset Token'** and save the generated token.
+**'IMPORTANT! NO ONE ELSE SHOULD SEE OR POSSESS THIS TOKEN. KEEP IT SAFE!'**
+
+### Step 4:
+Go to the **'OAuth2'** tab, navigate to the URL Generator, select the **'bot'** scope, and assign the desired permissions.
+
+### Step 5:
+Copy the generated URL and paste it into your web browser. Discord will open and ask where the bot should be installed. Select your existing server here.
 
 ---
 
-## 4. Mit Docker starten (Empfohlen)
+## 3. Install Docker (IMPORTANT)
 
-Du musst keine Abhängigkeiten auf deinem PC installieren. Führe einfach den untenstehenden Start-Befehl aus und die .yml macht den Rest.
+It is crucial that you have Docker installed.
+Otherwise, the following steps will **`NOT`** work!
 
-### Container starten:
+---
+
+## 4. Run with Docker (Recommended)
+
+You don't need to install any dependencies on your PC. Simply run the start command below, and the `docker-compose.yml` will handle the rest.
+
+### Start container:
 ```bash
 docker compose up -d
 ```
-### Container stoppen:
+### Stop container:
 ```bash
 docker compose down
 ```
 
-> 💡 Hinweis für die Docker unerfahrende -> Hier könnt ihr das offizielle Docker CLI Cheat Sheet nutzen https://docs.docker.com/get-started/docker_cheatsheet.pdf
+> 💡 Note for Docker beginners -> You can use the official Docker CLI Cheat Sheet here: https://docs.docker.com/get-started/docker_cheatsheet.pdf
 
 ---
 
-## 🏗️ Projektstruktur
+## 🏗️ Project Structure
 
 ```plaintext
 .
-├── bot.py             # Die Bot-Logik (Python)
-├── Dockerfile         # Bauanleitung für das Docker-Image
-├── requirements.txt   # Benötigte Python-Bibliotheken
-├── .env               # Private Geheimnisse (wird durch .gitignore geschützt)
-├── app.json           # Server-Konfiguration (wird durch .gitignore geschützt)
-├── .gitignore         # Verhindert den Upload privater Dateien auf GitHub
-└── .dockerignore      # Verhindert, dass unnötige Dateien im Image landen
+├── bot.py             # The bot logic (Python)
+├── Dockerfile         # Build instructions for the Docker image
+├── requirements.txt   # Required Python libraries
+├── .env               # Private secrets (protected by .gitignore)
+├── app.json           # Server configuration (protected by .gitignore)
+├── .gitignore         # Prevents the upload of private files to GitHub
+└── .dockerignore      # Prevents unnecessary files from ending up in the image
 ```
 
 ---
 
-## 🔒 Sicherheit
+## 🔒 Security
 
-Die Dateien `.env` und `app.json` enthalten sensible Informationen. Sie sind in der `.gitignore` eingetragen, damit sie niemals öffentlich auf GitHub landen. Nutze die bereitgestellten `.example`-Dateien im Repository als Vorlage für dein eigenes Setup.
+The files `.env` and `app.json` contain sensitive information. They are included in the `.gitignore` to ensure they are never published on GitHub. Use the provided `.example` files in the repository as templates for your own setup.
 
 ---
 
-Entwickelt mit ❤️, Docker und der Hilfe von ChatGPT und Gemini.
+Developed with ❤️ and Docker.
