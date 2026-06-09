@@ -8,6 +8,10 @@ from mcstatus import JavaServer
 import os
 import sys
 import dotenv
+from datetime import datetime
+
+#set time
+time = datetime.now().strftime("%Y-%m-%d %H:%M")
 
 # Path to app.json
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -44,16 +48,16 @@ def check_token(token):
 check_token(token)
 
 # Function to check if the server port is open and get player count
-def check_port(ip, port):
+def check_port(ip, port, time):
     try:
         server = JavaServer.lookup(f"{ip}:{port}")
         status = server.status()
         player_count = status.players.online
         return Embed(title="Server is online",
-                     description=f"IPv4: {ip}\nPort: {port}\nOnline: {player_count}",
+                     description=f"IPv4: {ip}\nPort: {port}\nOnline: {player_count}\nChecked at: " + time,
                      color=ms_status_color_on)
     except Exception as e:
-        return Embed(title="Server is offline! \nIn the meantime you can test the command '!game'.",
+        return Embed(title="Server is offline! \nIn the meantime you can test the command '!game'.\nChecked at: " + time,
                      color=ms_status_color_off)
 
 @bot.event
@@ -83,7 +87,7 @@ async def schere_stein_papier(ctx, auswahl: str = None):
 
 @bot.command(name='status')
 async def serverinfo(ctx):
-    answer = check_port(IP, ms_port)
+    answer = check_port(IP, ms_port, time)
     await ctx.send(embed=answer)
 
 @bot.command(name='h')
@@ -92,6 +96,8 @@ async def help_command(ctx):
 
 @bot.command(name='ping')
 async def ping(ctx):
-    await ctx.send("Pong!")
+    answer = "Pong!\nSend at: " + time
+    await ctx.send(embed=Embed(title=answer, color=0x0000FF))
+
 
 bot.run(token)
