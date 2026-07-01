@@ -9,9 +9,11 @@ import os
 import sys
 import dotenv
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 #set time
-time = datetime.now().strftime("%Y-%m-%d %H:%M")
+tz_berlin = ZoneInfo("Europe/Berlin")
+time = datetime.now(tz=tz_berlin).strftime("%Y-%m-%d %H:%M")
 
 # Path to app.json
 script_dir = os.path.dirname(os.path.abspath(__file__))
